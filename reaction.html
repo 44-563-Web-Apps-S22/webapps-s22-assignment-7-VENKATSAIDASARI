@@ -29,11 +29,11 @@
 
     }
     function startTime() {
-        for(let i=0;i<4;i++)
-        {
-          setTimeout(()=>{
-        document.getElementById('countdown').innerHTML = i
-      }, (3-i)*1000)
+        var countdown=Math.floor(Math.random() * 9)+2 
+        for (let k = 0; k <= countdown; k++) {
+          setTimeout(() => {
+            document.getElementById('countdown').innerHTML = k;
+          }, (countdown - k) * 1000);
       }
 
       setTimeout(() => {
