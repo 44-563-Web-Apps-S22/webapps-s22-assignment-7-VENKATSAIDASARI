@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-<html> <head> <style>
+<html>
+	
+<head>
+	<title>Reversed queue</title>
+	<h1>DVSaiRam builds a reversed queue</h1>
+	 <style>
     .flex-container {
       display: flex;  flex-direction:row;
       background-color: red;
@@ -17,34 +22,67 @@
 		 background-color: green;
 	  }
 	}
-</style></head>
-
-
-
+</style>
+</head>
 <body>
-		<div class="flex-container" id="target">
-		  <div>row item 1</div>   
-		  <div>row item 2</div>  
-		  <div>row item 3</div>  
-		</div>
-	
-	<p> Press the button to create an new element of type div and then add it to the container.
-		</p>
-		<button onclick="makeNewDiv()">Add one</button>
-	
-	
+	<div class="flex-container" id="target">
+	  <div class="queue">row item 1</div>   
+	  <div class="queue">row item 2</div>  
+	  <div class="queue">row item 3</div>  
+	</div>
+	<br>
+	<p> To create an new element of type div and then add it to the container, press here.</p>
+	<input type="text" id="text_input" name="text_input"><br>
+	<button onclick="makeNewDiv()">Add value</button>
+	<p>To remove the last element from the container press here.</p>
+	<button onclick="fetchItem()">Fetch</button>
+	<p>To get rid of elements with same text, press here.</p>
+	<button onclick="zap()">Zap values</button>
+	<p>To remove the duplicates,press here</p>
+	<button onclick="removeDuplicates()">Unique</button>
 </body>
 <script>
 	function makeNewDiv(){
 		/* make the div and its text */
 		let element = document.createElement("div")
-		element.innerHTML = "an item after 3"
+		element.innerHTML = document.getElementById("text_input").value;
+		element.setAttribute("class", "queue");
 		element.style.color = "orange"
 
 		/* add it to the container */
-		let container = document.getElementById('target')
-		container.appendChild(element)
-		
+		let container = document.getElementById('target');
+		container.insertBefore(element, container.firstChild);	
+	}
+	function fetchItem() {
+		queueItems = document.getElementsByClassName("queue");
+		let length = queueItems.length;
+		if (length > 0) {
+			queueItems[length - 1].remove();
+		}
+	}
+	function zap() {
+		let queueItems = document.getElementsByClassName("queue");
+		input = document.getElementById("text_input").value;
+		let i = 0;
+		for (let queueItem of queueItems) {
+			i++;
+			if (queueItem.innerHTML == input) {
+				queueItems[i - 1].remove();
+				console.log("We got rid of elements having same text");
+			}
+		}
+	}
+	function removeDuplicates() {
+        queueItems = document.getElementsByClassName('queue');
+        var len = queueItems.length
+        for (let i = 0; i < len; i++) {
+            for (let j = i + 1; j < len - 1; j++) {
+                if (queueItems[i].innerHTML == queueItems[j].innerHTML) {
+                    queueItems[j].remove();
+                    
+                }
+            }
+        }
 	}
 </script>
 </html>	
